@@ -1,48 +1,31 @@
 package ru.iteco.fmhandroid.ui.steps;
 
-import android.view.View;
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.enterButton;
-//import static ru.iteco.fmhandroid.ui.pages.AuthPage.exitButton;
-import static ru.iteco.fmhandroid.ui.pages.AuthPage.getElementButtonExit;
-import static ru.iteco.fmhandroid.ui.pages.AuthPage.getElementsButtonLogOut;
-
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.getAuthLoginField;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.getAuthPasswordField;
-
-import static ru.iteco.fmhandroid.ui.pages.AuthPage.getTextAuthorization;
-
+import static ru.iteco.fmhandroid.ui.pages.AuthPage.getElementsButtonLogOut;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.titleTextElement;
-import static ru.iteco.fmhandroid.ui.steps.AboutSteps.waitUntilElement;
 
 import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.matcher.ViewMatchers;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
-
-import org.hamcrest.Matcher;
 //import static ru.iteco.fmhandroid.pages.WaitId.waitFor;
 
 
 public class AuthSteps {
 
 
-               // public static void authorization() {
+    // public static void authorization() {
 //            try {
 //                AuthPage.textAuthorization();
 //            } catch (NoMatchingViewException e) {
@@ -52,16 +35,17 @@ public class AuthSteps {
 //            AuthSteps.clickPasswordField();
 //            AuthPage.clickButton(AuthPage.getAuthElementsButton());
 //        }
-        public static void validAuthorization() {
-            try {
-                AuthSteps.textAuthorization();
-                AuthSteps.clickLoginField();
-                AuthSteps.clickPasswordField();
-                AuthSteps.clickButtonSignIn();
-            } catch (NoMatchingViewException e) {
-                System.out.println("Already auth");
-            }
+    public static void validAuthorization() {
+        try {
+            AuthSteps.textAuthorization();
+            AuthSteps.clickLoginField();
+            AuthSteps.clickPasswordField();
+            AuthSteps.clickButtonSignIn();
+        } catch (NoMatchingViewException e) {
+            System.out.println("Already auth");
         }
+    }
+
     public static void textAuthorization() {
         Allure.step("Отобразилаcь страница Авторизации");
         //waitUntilElement(R.id.nav_host_fragment);
@@ -84,7 +68,7 @@ public class AuthSteps {
 //    Allure.step("страница авторизации");
 
     // Ждем окончания работы splashscreen
-   // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
+    // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
 
 //    waitUntilElement(R.id.nav_host_fragment);
 //        onView(allOf(withText("Authorization"),
@@ -99,7 +83,6 @@ public class AuthSteps {
 //    }
 
 
-
 //    private static void waitUntilElementDisappears(int splashScreenCircularProgressIndicator) {
 //    }
 
@@ -107,11 +90,12 @@ public class AuthSteps {
     public static void clickLoginField() {
         Allure.step("В поле Логин ввести: login2");
         waitUntilElement(R.id.login_text_input_layout);
-                onView(getAuthLoginField())
+        onView(getAuthLoginField())
                 .perform(replaceText("login2"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
 
     }
+
     public static void clickPasswordField() {
         Allure.step("В поле Пароль ввести: password2");
         waitUntilElement(R.id.password_text_input_layout);
@@ -120,22 +104,20 @@ public class AuthSteps {
                 .check(matches(isDisplayed()));
     }
 
-    public static void clickButtonSignIn(){
-            Allure.step("Нажать на кнопку Войти");
+    public static void clickButtonSignIn() {
+        Allure.step("Нажать на кнопку Войти");
         waitUntilElement(R.id.enter_button);
 
         enterButton
                 .perform(click());
         // Ожидаем исчезновения индикатора загрузки
-       // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
+        // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
         //waitUntilElement(R.id.splash_screen_circular_progress_indicator);
 //        ViewInteraction textView2 = onView(withText("News"));
 //        textView2.check(matches(isDisplayed()));
 //
 //        textView2.check(matches(withText("News")));
     }
-
-
 
 
 //    public static void waitUntilElementDisappears(int id) {
@@ -162,7 +144,7 @@ public class AuthSteps {
         onView(withId(id)).check(matches(isDisplayed()));
     }
 
-    public static void clickButtonLogOut(){
+    public static void clickButtonLogOut() {
         Allure.step("Нажать на кнопку Выйти");
         waitUntilElement(android.R.id.title);
 
@@ -170,7 +152,7 @@ public class AuthSteps {
                 .perform(click());
     }
 
-//    public static void clickButtonExit(Integer resourceId) {
+    //    public static void clickButtonExit(Integer resourceId) {
 //        Allure.step("Нажать на кнопку Выход");
 //        onView(withId(R.id.authorization_image_button));
 ////                .check(matches(isDisplayed()));;;
@@ -187,29 +169,29 @@ public class AuthSteps {
 //        onView(getElementButtonExit())
 //                .perform(click());
 //    }
-public static void clickButtonExit(Integer resourceId) {
-    Allure.step("Нажать на кнопку Выход");
+    public static void clickButtonExit(Integer resourceId) {
+        Allure.step("Нажать на кнопку Выход");
 
-    // Убедиться, что элемент виден
-    //waitUntilElement(R.id.authorization_image_button);
+        // Убедиться, что элемент виден
+        //waitUntilElement(R.id.authorization_image_button);
 
-    // Проверка на видимость элемента
-    onView(withId(resourceId))
-            .check(matches(isDisplayed()))
-            .perform(click());
-}
+        // Проверка на видимость элемента
+        onView(withId(resourceId))
+                .check(matches(isDisplayed()))
+                .perform(click());
+    }
 
 
-    public  static void textErrorWrong() {
+    public static void textErrorWrong() {
 
         Allure.step("Отобразилаcь ошибка: Login and password cannot be empty");
         onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
 
 
-    public  static void textErrorEmpty() {
+    public static void textErrorEmpty() {
         Allure.step("Ошибка: Login and password cannot be empty");
-       onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
+        onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
 
     public static void clickLoginEmpty() {
@@ -218,7 +200,8 @@ public static void clickButtonExit(Integer resourceId) {
                 .perform(replaceText(" "), closeSoftKeyboard());
         //onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
-//
+
+    //
     public static void clickLoginFieldUnregisteredUser() {
         Allure.step("Ввести в поле Логин данные незарегистрированного пользователя");
         onView(getAuthLoginField())
@@ -260,7 +243,7 @@ public static void clickButtonExit(Integer resourceId) {
     public static void clickPasswordFieldWithSpecialCharacters() {
         Allure.step("Ввести в поле Пароль спецсимволы");
         onView(getAuthPasswordField())
-                .perform(replaceText("$%&(*^$"), closeSoftKeyboard())
+                .perform(replaceText("$^&%^&(*^@"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
         //onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
@@ -270,7 +253,7 @@ public static void clickButtonExit(Integer resourceId) {
         onView(getAuthPasswordField())
                 .perform(replaceText("p"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
-    //    onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+        //    onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
     }
 
 
@@ -296,8 +279,6 @@ public static void clickButtonExit(Integer resourceId) {
 
 
 }
-
-
 
 
 //  public static void textAuthorization(){
