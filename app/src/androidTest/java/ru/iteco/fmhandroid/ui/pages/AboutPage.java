@@ -22,10 +22,9 @@ import ru.iteco.fmhandroid.ui.steps.AboutSteps;
 
 public class AboutPage extends AboutSteps {
 
-    public static Matcher<View> getAboutElementsButtonMainMenu() {
-        return  allOf(withId(R.id.main_menu_image_button), withContentDescription("Main menu"));
 
-    }
+
+
     public static  Matcher<View> getAboutElementsButtonAbout() {
         return allOf(withId(android.R.id.title), withText("About"));
     }

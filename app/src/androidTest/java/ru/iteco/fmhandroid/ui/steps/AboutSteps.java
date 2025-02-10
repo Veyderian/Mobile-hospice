@@ -8,9 +8,12 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.ui.pages.AboutPage.getAboutElementsButtonAbout;
-import static ru.iteco.fmhandroid.ui.pages.AboutPage.getAboutElementsButtonMainMenu;
+import static ru.iteco.fmhandroid.ui.pages.MainPage.getButtonMainMenu;
 import static ru.iteco.fmhandroid.ui.pages.AboutPage.getAboutElementsButtonPrivacyPolicy;
 import static ru.iteco.fmhandroid.ui.pages.AboutPage.getAboutElementsButtonTermsOfUse;
+import static ru.iteco.fmhandroid.ui.pages.WaitId.waitFor;
+import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+import ru.iteco.fmhandroid.ui.pages.AboutPage;
 
 import android.view.View;
 
@@ -21,16 +24,10 @@ import ru.iteco.fmhandroid.R;
 
 public class AboutSteps {
 
-    public static void clickButtonMainMenu() {
-        Allure.step("Нажать на кнопку Главное меню");
-//        waitUntilElement(R.id.main_menu_image_button);
-//        waitFor(2);
-        onView(getAboutElementsButtonMainMenu())
-                .perform(click());
-    }
 
-    private static void waitFor(int i) {
-    }
+
+
+
 
     public static void clickButtonAbout() {
         Allure.step("Нажать на кнопку О приложении");
@@ -43,18 +40,21 @@ public class AboutSteps {
         Allure.step("Нажать на ссылку Политика конфиденциальности");
         waitUntilElement(R.id.about_privacy_policy_value_text_view);
         onView(getAboutElementsButtonPrivacyPolicy())
-                .check(matches(allOf(withText("https://vhospice.org/#/privacy-policy/"), isDisplayed(), isClickable())));
+                .check(matches(allOf(withText("https://vhospice.org/#/privacy-policy/"), isDisplayed(), isClickable())))
+                .perform(click());
+
     }
 
     public static void clickButtonTermsOfUse() {
         Allure.step("Нажать на ссылку Пользовательское соглашение");
         waitUntilElement(R.id.about_terms_of_use_value_text_view);
         onView(getAboutElementsButtonTermsOfUse())
-                .check(matches((Matcher<View>) allOf(withText("https://vhospice.org/#/terms-of-use"), isDisplayed(), isClickable())));
+                .check(matches((Matcher<View>) allOf(withText("https://vhospice.org/#/terms-of-use"), isDisplayed(), isClickable())))
+                .perform(click());
     }
 
-    static void waitUntilElement(int id) {
-    }
+//    static void waitUntilElement(int id) {
+//    }
 }
 
 

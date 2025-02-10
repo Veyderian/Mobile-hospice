@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -28,28 +29,34 @@ import ru.iteco.fmhandroid.ui.steps.AuthSteps;
 
     public class AuthPage<withText> extends AuthSteps {
 
-        public static Matcher<View> getTextAuthorization() {
+//        public static Matcher<View> getTextAuthorization() {
+////
+//            return allOf(withId(R.id.authorization_image_button), withContentDescription("Authorization"),
+//                    childAtPosition(
+//                            allOf(withId(R.id.container_custom_app_bar_include_on_fragment_main),
+//                                    childAtPosition(
+//                                            withClassName(is("android.widget.LinearLayout")),
+//                                            0)),
+//                            5),
+//                    isDisplayed());
+////        appCompatImageButton.perform(click());
 //
-            return allOf(withId(R.id.authorization_image_button), withContentDescription("Authorization"),
-                    childAtPosition(
-                            allOf(withId(R.id.container_custom_app_bar_include_on_fragment_main),
-                                    childAtPosition(
-                                            withClassName(is("android.widget.LinearLayout")),
-                                            0)),
-                            5),
-                    isDisplayed());
-//        appCompatImageButton.perform(click());
-
-        }
+//        }
 
         public static Matcher<View> getAuthLoginField() {
             return allOf(withHint("Login"),
                     withParent(withParent(withId(R.id.login_text_input_layout))));
+//                    childAtPosition(
+//                            childAtPosition(
+//                                    withId(R.id.login_text_input_layout),
+//                                    0),
+//                            0),
+                   // isCompletelyDisplayed());
         }
-public static ViewInteraction enterText = onView(
-                allOf(withText("News"),
-        withParent(withParent(withId(R.id.container_list_news_include_on_fragment_main))),
-        isDisplayed()));
+//public static ViewInteraction enterText = onView(
+//                allOf(withText("News"),
+//        withParent(withParent(withId(R.id.container_list_news_include_on_fragment_main))),
+//        isDisplayed()));
 
             // enterText.check(matches(withText("News")));
         public static Matcher<View> getAuthPasswordField() {
@@ -65,13 +72,14 @@ public static ViewInteraction enterText = onView(
 //            return allOf(
 //                    withId(R.id.authorization_image_button), withContentDescription("Authorization"));
 //        }
-        public static int getElementButtonExit() {
-            return R.id.authorization_image_button;
-        }
+//        public static int getElementButtonExit() {
+//            return R.id.authorization_image_button;
+//        }
 
 
-//        public static ViewInteraction exitButton =
-//            onView(withId(R.id.authorization_image_button));
+        public static ViewInteraction exitButton =
+            onView(allOf(
+                    withId(R.id.authorization_image_button), withContentDescription("Authorization")));
 
 
         public static Matcher<View> getElementsButtonLogOut() {
@@ -86,13 +94,14 @@ public static ViewInteraction enterText = onView(
 //            }
         public static void getFindText() {
             withText("News");
+            //withText((endsWith)"News");
             withParent(withParent(withId(R.id.container_list_news_include_on_fragment_main)));
             isDisplayed();
         }
 
 
 
-        public static ViewInteraction titleTextElement = onView(withText("Authorization"));
+       // public static ViewInteraction titleTextElement = onView(withText("Authorization"));
 
 //        public static void clickButton() {
 //        }
@@ -117,7 +126,15 @@ public static ViewInteraction enterText = onView(
             };
 
         }
+       public static ViewInteraction titleTextElement =
+           onView(withText("Authorization"));
+
+//        public static void titleTextElement() {
+//            withText("Authorization");
+//        }
 
 
+//        public static Integer getAuthorizationElementsButtonExit() {
+//        }
     }
 
