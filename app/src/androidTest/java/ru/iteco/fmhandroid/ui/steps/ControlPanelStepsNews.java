@@ -20,24 +20,25 @@ import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelB
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonDateCreatingNews;
 //import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonDeleteNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonDeleteNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonEditNews;
+import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonEditNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsButtonFilterNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonOkDateCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonOkDeleteNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonOkTimeCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonSaveCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonSaveEditingNews;
+import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSaveEditingNews;
 //import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonSorting;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonSwitcher;
+import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSwitcher;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTimeCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTitleCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonTitleNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonTitleNews;
+import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonTitleNews;
+import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonTitleNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelDescriptionCreatingNews;
 //import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsFilterNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelRemoveCheckBoxActive;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelRemoveCheckBoxNotActive;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
+//import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -51,12 +52,6 @@ public class ControlPanelStepsNews {
                 .perform(click());
     }
 
-//    public static void waitUntilElement(int id) {
-//        onView(withId(id)).check(matches(isDisplayed()));
-//    }
-
-
-
     public static void clickButtonDeleteNews(){
         Allure.step("Нажать на кнопку Удалить новость");
         waitUntilElement(R.id.delete_news_item_image_view);
@@ -65,6 +60,12 @@ public class ControlPanelStepsNews {
     }
 
     public static void clickClickNews(){
+        Allure.step("Нажать на кнопку Новости на главной странице мобильного приложения");
+        waitUntilElement(R.id.news_item_material_card_view);
+        onView(getNewsControlPanelButtonClickNews())
+                .perform(click());
+    }
+    public static void clickExtendNews(){
         Allure.step("Нажать на кнопку Новости на главной странице мобильного приложения");
         waitUntilElement(R.id.news_item_material_card_view);
         onView(getNewsControlPanelButtonClickNews())

@@ -6,31 +6,18 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.enterButton;
-import static ru.iteco.fmhandroid.ui.pages.AuthPage.exitButton;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.getAuthLoginField;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.getAuthPasswordField;
 import static ru.iteco.fmhandroid.ui.pages.AuthPage.getElementsButtonLogOut;
-import static ru.iteco.fmhandroid.ui.pages.AuthPage.titleTextElement;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitFor;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
-//import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
-//import static ru.iteco.fmhandroid.ui.pages.AuthPage.titleTextElement;
-
-import android.view.View;
+import static ru.iteco.fmhandroid.ui.pages.AuthPage.getTextAuthorization;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitFor;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
 
 import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
-
-import org.hamcrest.Matcher;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -40,16 +27,6 @@ import ru.iteco.fmhandroid.R;
 public class AuthSteps {
 
 
-    // public static void authorization() {
-//            try {
-//                AuthPage.textAuthorization();
-//            } catch (NoMatchingViewException e) {
-//                return;
-//            }
-//            AuthSteps.clickLoginField();
-//            AuthSteps.clickPasswordField();
-//            AuthPage.clickButton(AuthPage.getAuthElementsButton());
-//        }
     public static void validAuthorization() {
         try {
             AuthSteps.textAuthorization();
@@ -61,60 +38,32 @@ public class AuthSteps {
         }
     }
 
-    public static void textAuthorization() {
-        Allure.step("Отобразилаcь страница Авторизации");
-//        waitUntilElement(R.id.nav_host_fragment);
-//       onView(isRoot()).perform(waitForWindowFocus());
-//        onView(withId(R.id.nav_host_fragment));
-        titleTextElement.check(matches(isDisplayed()));
-    }
-
-
 //    public static void textAuthorization() {
-//        Allure.step("страница авторизации");
-//        waitUntilElement(R.id.nav_host_fragment);
-////        onView(
-////                allOf(withText("Authorization"),
-////                        withParent(withParent(withId(R.id.nav_host_fragment))),
-////                        isDisplayed())).check(matches(withText("Authorization")));
-////        //waitFor(3);
-//        onView(getTextAuthorization())
-//                .check(matches(isDisplayed()));
-//    }
-//public static void textAuthorization() {
-//    Allure.step("страница авторизации");
-
-    // Ждем окончания работы splashscreen
-    // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
-
-//    waitUntilElement(R.id.nav_host_fragment);
-//        onView(allOf(withText("Authorization"),
-//            (withId(R.id.nav_host_fragment)))).check(matches(isDisplayed()));
-
-//    onView(getTextAuthorization())
-//            .check(matches(isDisplayed()));
-//}
-//    public static void waitUntilElementDisappears(int resourceId) {
-//        onView(withId(resourceId))
-//                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+//        Allure.step("Отобразилаcь страница Авторизации");
+////        waitUntilElement(R.id.nav_host_fragment);
+////       onView(isRoot()).perform(waitForWindowFocus());
+////        onView(withId(R.id.nav_host_fragment));
+//        titleTextElement.check(matches(isDisplayed()));
 //    }
 
 
-//    private static void waitUntilElementDisappears(int splashScreenCircularProgressIndicator) {
-//    }
+    public static void textAuthorization() {
+        Allure.step("страница авторизации");
+        waitUntilElement(R.id.nav_host_fragment);
+        waitFor(3);
+        onView(getTextAuthorization())
+                .check(matches(isDisplayed()));
+    }
 
 
     public static void clickValidLoginField() {
         Allure.step("В поле Логин ввести: login2");
         waitUntilElement(R.id.login_text_input_layout);
         onView(getAuthLoginField())
-                .perform(replaceText("login2"), closeSoftKeyboard());
-               // .check(matches(isDisplayed()));
+                .perform(replaceText("login2"), closeSoftKeyboard())
+                .check(matches(isDisplayed()));
 
     }
-
-//    private static void waitUntilElement(int id) {
-//    }
 
     public static void clickValidPasswordField() {
         Allure.step("В поле Пароль ввести: password2");
@@ -127,42 +76,10 @@ public class AuthSteps {
     public static void clickButtonSignIn() {
         Allure.step("Нажать на кнопку Войти");
         waitUntilElement(R.id.enter_button);
-
         enterButton
                 .perform(click());
-        // Ожидаем исчезновения индикатора загрузки
-        // waitUntilElementDisappears(R.id.splash_screen_circular_progress_indicator);
-        //waitUntilElement(R.id.splash_screen_circular_progress_indicator);
-//        ViewInteraction textView2 = onView(withText("News"));
-//        textView2.check(matches(isDisplayed()));
-//
-//        textView2.check(matches(withText("News")));
+
     }
-
-
-//    public static void waitUntilElementDisappears(int id) {
-//        onView(withId(id)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
-//    }
-
-//    public static void clickButtonSignIn() {
-//        Allure.step("Нажать на кнопку Войти");
-//
-//        // Ожидание кнопки "Войти"
-//        waitUntilElement(R.id.enter_button);
-//
-//                // Клик по кнопке
-//        enterButton.perform(click());
-//
-//        // Ожидание и проверка текста "News"
-//        ViewInteraction textView2 = onView(withText("News"));
-//        textView2.check(matches(isDisplayed())); // Проверка, что элемент отображается
-//        textView2.check(matches(withText("News"))); // Проверка текста
-//    }
-
-    // Реализация метода ожидания элемента
-//    public static void waitUntilElement(int id) {
-//        onView(withId(id)).check(matches(isDisplayed()));
-//    }
 
     public static void clickButtonLogOut() {
         Allure.step("Нажать на кнопку Log out");
@@ -172,70 +89,13 @@ public class AuthSteps {
                 .perform(click());
     }
 
-    //    public static void clickButtonExit(Integer resourceId) {
-//        Allure.step("Нажать на кнопку Выход");
-//        onView(withId(R.id.authorization_image_button));
-////                .check(matches(isDisplayed()));;;
-//        //waitUntilElement(R.id.authorization_image_button);
-//        //waitFor(2);
-//        onView(withId(resourceId))
-//                .perform(click());
-//    }
-    public static void clickButtonExit() {
+    public static void clickButtonExit(Integer resourceId) {
         Allure.step("Нажать на кнопку Выход");
-//        onView(isRoot()).perform(waitFor(5000)); // Ждём 2 секунды перед кликом
-//        onView(withId(R.id.authorization_image_button)).perform(click());
-//
-//        onView(withId(R.id.authorization_image_button))
-//                .check((view, noViewFoundException) -> {
-//                    if (noViewFoundException != null) {
-//                        throw noViewFoundException;
-//                    }
-//                    System.out.println("Visibility: " + view.getVisibility());
-//                    System.out.println("Width: " + view.getWidth() + ", Height: " + view.getHeight());
-//                });
-
-
-//        onView(withId(R.id.authorization_image_button))
-//                .check(matches(isDisplayed()))
-//                .perform(click());
-
-
-       onView(isRoot()).perform(waitForWindowFocus());
-       //onView(withId(R.id.authorization_image_button));
-        onView(withId(R.id.authorization_image_button))
-                .check(matches(isDisplayed()))
-                 .perform(click());
-//        //waitUntilElement(R.id.authorization_image_button);
-//        exitButton.check(matches(isDisplayed()));
-//        exitButton.perform(click());
-        //waitUntilElement(R.id.authorization_image_button);
-        //onView(withId(R.id.authorization_image_button)).check(matches(isDisplayed())); //check(matches(isCompletelyDisplayed()));
-
-//        onView(exitButton)
-//                .perform(click());
-//        exitButton
-//                .perform(click());
-   }
-//    public static void clickButtonExit(Integer resourceId) {
-//        Allure.step("Нажать на кнопку Выход");
-//
-//        // Убедиться, что элемент виден
-//       waitUntilElement(R.id.authorization_image_button);
-//        onView(isRoot()).perform(waitForWindowFocus());
-//       onView(withId(R.id.authorization_image_button));
-//
-//
-//        //onView(withText("R.id.ToastText")) ( withText ( "R.id.ToastText" )) . inRoot ( withDecorView ( Matchers . not ( decorView ))) // Здесь вы используете decorView . check ( matches ( isDisplayed ()));                .inRoot(withDecorView(Matchers.not(decorView)))// Здесь вы используете decorView                 .check(matches(isDisplayed()));
-//
-//
-//        // Проверка на видимость элемента
-//        onView(withId(resourceId))
-//                .check(matches(isDisplayed()))
-//                .perform(click());
-//    }
-
-
+        waitUntilElement(R.id.authorization_image_button);
+        waitFor(2);
+        onView(withId(resourceId))
+                .perform(click());
+    }
 
 
     public static void textErrorWrong() {
@@ -243,16 +103,6 @@ public class AuthSteps {
         Allure.step("Отобразилаcь ошибка: Login and password cannot be empty");
         onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
-
-    // check toast visibility
-//    public static void textErrorWrong() {
-//
-//        Allure.step("Отобразилаcь ошибка: Login and password cannot be empty");
-//        onView(withText("Login and password cannot be empty")).
-//                inRoot(withDecorView(not(is(activity.getWindow().getDecorView())))).
-//                check(matches(isDisplayed()));
-//    }
-
 
 
     public static void textErrorEmpty() {
@@ -264,14 +114,13 @@ public class AuthSteps {
         Allure.step("Поле Логин оставить пустым");
         onView(getAuthLoginField())
                 .perform(replaceText(" "), closeSoftKeyboard());
-        //onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
     }
 
     public static void clickLoginSpace() {
         Allure.step("Поле Логин заполнить пробелами");
         onView(getAuthLoginField())
                 .perform(replaceText("pass"), closeSoftKeyboard());
-        //onView(allOf(withContentDescription("Login and password cannot be empty"), isDisplayed()));
+
     }
 
     //
@@ -279,7 +128,7 @@ public class AuthSteps {
         Allure.step("Ввести в поле Логин данные незарегистрированного пользователя");
         onView(getAuthLoginField())
                 .perform(replaceText("loginer123"), closeSoftKeyboard());
-//        onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+//
     }
 
     public static void clickLoginFieldWithSpecialCharacters() {
@@ -293,7 +142,7 @@ public class AuthSteps {
         Allure.step("Ввести в поле Логин один символ");
         onView(getAuthLoginField())
                 .perform(replaceText("l"), closeSoftKeyboard());
-//        onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+//
     }
 
     public static void clickLoginFieldTwoSymbols() {
@@ -301,6 +150,7 @@ public class AuthSteps {
         onView(getAuthLoginField())
                 .perform(replaceText("La"), closeSoftKeyboard());
     }
+
     public static void clickLoginFieldOfNumbers() {
         Allure.step("Ввести в поле Логин цифры");
         onView(getAuthLoginField())
@@ -308,15 +158,12 @@ public class AuthSteps {
                 .check(matches(isDisplayed()));
     }
 
-
-
-
     public static void clickPasswordFieldIsEmpty() {
         Allure.step("Поле Пароль оставить пустым");
         onView(getAuthPasswordField())
                 .perform(replaceText(" "), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
-//        onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+
     }
 
     public static void clickPasswordFieldWrongPassword() {
@@ -324,7 +171,7 @@ public class AuthSteps {
         onView(getAuthPasswordField())
                 .perform(replaceText("password123"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
-//        onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+
     }
 
     public static void clickPasswordFieldWithSpecialCharacters() {
@@ -332,7 +179,7 @@ public class AuthSteps {
         onView(getAuthPasswordField())
                 .perform(replaceText("$^&%^&(*^@"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
-        //onView(allOf(withContentDescription("Wrong login or password"), isDisplayed()));
+
     }
 
     public static void clickPasswordFieldOneSymbol() {
@@ -358,61 +205,30 @@ public class AuthSteps {
     }
 
 
-        public static <object> ViewAction waitForWindowFocus() {
-            return new ViewAction() {
-                @Override
-                public Matcher<View> getConstraints() {
-                    return isRoot(); // Действие будет применяться к корневому View
-                }
-
-                @Override
-                public String getDescription() {
-                    return "Ожидание, пока окно получит фокус";
-                }
-
+//        public static <object> ViewAction waitForWindowFocus() {
+//            return new ViewAction() {
 //                @Override
-                public void perform(UiController uiController, View view) {
-                    while (!view.hasWindowFocus()) {
-                        uiController.loopMainThreadForAtLeast(100); // Пауза 100 мс
-                    }
-                }
-            };
+//                public Matcher<View> getConstraints() {
+//                    return isRoot(); // Действие будет применяться к корневому View
+//                }
+//
+//                @Override
+//                public String getDescription() {
+//                    return "Ожидание, пока окно получит фокус";
+//                }
+//
+////                @Override
+//                public void perform(UiController uiController, View view) {
+//                    while (!view.hasWindowFocus()) {
+//                        uiController.loopMainThreadForAtLeast(100); // Пауза 100 мс
+//                    }
+//                }
+//            };
 
 
-        }
+//        }
 }
 
-
-//  public static void textAuthorization(){
-//        Allure.step("страница авторизации");
-//        waitUntilElement(R.id.nav_host_fragment);
-//        onView(getTextAuthorization())
-//               .check(matches(isDisplayed()));
-////        onView(isRoot()).perform(waitForWindowFocus());
-////        onView(withId(R.id.nav_host_fragment))
-////                .check(matches(isDisplayed()));;;
-////        //waitFor(3);
-////        onView(getAuthElementsTextAuthorization())
-////                .check(matches(isDisplayed()));
-//    }
-
-//    public static void clickLoginField() {
-//        Allure.step("В поле Логин ввести: login2");
-//        onView(isRoot()).perform(waitForWindowFocus()); // Ожидание
-//        onView(withId(R.id.login_text_input_layout))
-//                .check(matches(isDisplayed()));
-//        onView(getAuthElementsLoginField())
-//                .perform(replaceText("login2"), closeSoftKeyboard())
-//                .check(matches(isDisplayed()));
-
-//    public static void clickButton(Integer resourceId){
-//        //public static void clickButton(Integer resourceId){
-//        Allure.step("Нажать на кнопку Войти");
-//        onView(withId(R.id.enter_button))
-//                .check(matches(isDisplayed()));;;
-//        onView(withId(resourceId))
-//                .perform(click());
-//    }
 
 
 

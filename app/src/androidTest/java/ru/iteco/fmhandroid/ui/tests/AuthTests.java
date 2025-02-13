@@ -1,10 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import androidx.test.espresso.IdlingRegistry;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +14,6 @@ import io.qameta.allure.kotlin.Epic;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.pages.AuthPage;
-import ru.iteco.fmhandroid.ui.pages.EspressoIdlingResource;
 import ru.iteco.fmhandroid.ui.steps.AuthSteps;
 
 
@@ -35,24 +32,15 @@ public class AuthTests {
 //        @Rule
 //        public ActivityTestRule<SplashActivity> activityTestRule = new ActivityTestRule<>(SplashActivity.class);
 
-    @Before
-    public void setUp() {
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource);
-    }
-
-    @After
-    public void tearDown() {
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource);
-    }
-//        @Before
-//        public void disableAnimations() {
-//            Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-//            Settings.Global.putFloat(context.getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE, 0);
-//            Settings.Global.putFloat(context.getContentResolver(), Settings.Global.TRANSITION_ANIMATION_SCALE, 0);
-//            Settings.Global.putFloat(context.getContentResolver(), Settings.Global.WINDOW_ANIMATION_SCALE, 0);
-//        }
-
-
+    //    @Before
+//    public void setUp() {
+//        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource);
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource);
+//    }
     @Before
     public void authVerification() {
 
@@ -61,7 +49,7 @@ public class AuthTests {
             AuthSteps.textAuthorization();
             //AuthPage.titleTextElement();
         } catch (androidx.test.espresso.NoMatchingViewException e) {
-            AuthSteps.clickButtonExit();
+            AuthPage.clickButtonExit(AuthPage.getElementButtonExit());
             AuthSteps.clickButtonLogOut();
         }
 
@@ -71,7 +59,7 @@ public class AuthTests {
     @Story("TC - 2")
     @Description("Авторизация в мобильном приложении Мобильный хоспис (Позитивный)")
     public void successfulAuthorization() {
-        AuthSteps.textAuthorization();
+        //AuthSteps.textAuthorization();
         AuthSteps.clickValidLoginField();
         AuthSteps.clickValidPasswordField();
         AuthSteps.clickButtonSignIn();
@@ -86,7 +74,7 @@ public class AuthTests {
     @Story("TC - 4")
     @Description("Поле Логин пустое при авторизации")
     public void loginFieldIsEmpty() {
-        AuthSteps.textAuthorization();
+        //AuthSteps.textAuthorization();
         AuthSteps.clickLoginEmpty();
         AuthSteps.clickValidPasswordField();
         AuthPage.clickButtonSignIn();

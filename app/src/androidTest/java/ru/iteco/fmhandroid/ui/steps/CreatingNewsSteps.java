@@ -6,6 +6,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static org.hamcrest.Matchers.allOf;
@@ -20,7 +21,7 @@ import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelB
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTimeCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTitleCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelDescriptionCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -54,24 +55,11 @@ public class CreatingNewsSteps {
                 .perform(click(), replaceText("Собственное название категории"), closeSoftKeyboard());
     }
 
-    public static void clickButtonCreatingNewsNumbers() {
-        Allure.step("Ввести в поле Категория цифры");
-        waitUntilElement(R.id.news_item_category_text_auto_complete_text_view);
-        onView(getNewsControlPanelButtonCreatingNews())
-                .perform(click(), replaceText("123456"), closeSoftKeyboard());
-    }
-
-    public static void clickButtonCreatingCharacters() {
-        Allure.step("Ввести в поле Категория спецсимволы");
-        waitUntilElement(R.id.news_item_category_text_auto_complete_text_view);
-        onView(getNewsControlPanelButtonCreatingNews())
-                .perform(click(), replaceText("@#$%^&**"), closeSoftKeyboard());
-    }
-
     public static void clickButtonTitleCreatingNews() {
         Allure.step("Ввести в поле Заголовок заголовок новости");
-        waitUntilElement(R.id.news_item_title_text_input_edit_text);
+        //waitUntilElement(R.id.news_item_title_text_input_edit_text);
         onView(getNewsControlPanelButtonTitleCreatingNews())
+                .check(matches(isDisplayed()))
                 .perform(click(), clearText(), replaceText("Главные новости сегодня"), closeSoftKeyboard());
     }
 

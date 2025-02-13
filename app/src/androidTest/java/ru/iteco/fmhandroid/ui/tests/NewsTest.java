@@ -1,8 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
 import androidx.test.espresso.IdlingRegistry;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -30,9 +30,10 @@ import ru.iteco.fmhandroid.ui.steps.NewsSteps;
 @Epic("Тест-кейсы для проведения функционального тестирования вкладки News и AllNews")
 public class NewsTest {
 
+
     @Rule
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
     public void setUp() {
@@ -52,8 +53,8 @@ public class NewsTest {
 
     @AfterClass
     public static void exit() {
-        //AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
-        AuthSteps.clickButtonExit();
+        AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
+        //AuthSteps.clickButtonExit();
         AuthSteps.clickButtonLogOut();
     }
 
@@ -62,7 +63,7 @@ public class NewsTest {
     @Story("TC - 27")
     @Description("открытие страницы News через гамбургер меню (Позитивный)")
     public void openNewsPage() {
-        AuthSteps.validAuthorization();
+        //AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         //проверка
@@ -74,29 +75,37 @@ public class NewsTest {
     @Story("TC - 26")
     @Description("открытие страницы News через AllNews (Позитивный)")
     public void openNewsPageThroughAllNews() {
-        AuthSteps.validAuthorization();
+        //AuthSteps.validAuthorization();
         NewsSteps.clickButtonAllNews();
         //проверка
         AuthPage.getFindText();
-
     }
 
     @Test //3
+    @Story("TC - 25")
+    @Description("открытие страницы News через AllNews без новостей (Позитивный)")
+    public void openNewsPageThroughAllNewsNoNews() {
+        //AuthSteps.validAuthorization();
+        NewsSteps.clickButtonAllNews();
+        //проверка
+        NewsPage.getFindText1();
+    }
+
+    @Test //4
     @Story("TC - 28")
     @Description("Просмотр новостей во вкладке Новости (Позитивный)")
     public void viewingNews() {
-        AuthSteps.validAuthorization();
+        //AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickExpandNews();
     }
 
 
-    @Test //4
+    @Test //5
     @Story("TC - 30")
     @Description("Открытие окна Filter news (Позитивный)")
     public void openFilterNews() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -104,11 +113,10 @@ public class NewsTest {
     }
 
 
-    @Test //5
+    @Test //6
     @Story("TC - 31")
     @Description("Фильтрация новостей по категории (Позитивный)")
     public void filterNewsCategory() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -117,11 +125,10 @@ public class NewsTest {
     }
 
 
-    @Test //6
+    @Test //7
     @Story("TC - 32")
     @Description("Фильтрация новостей по датам  (Позитивный)")
     public void filterNewsCertainPeriodTime() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonDateStart();
@@ -131,11 +138,11 @@ public class NewsTest {
         NewsSteps.clickButtonFilter();
     }
 
-    @Test //7
+    @Test //8
     @Story("TC - 33")
     @Description("Фильтрация новостей по категории и датам в определенный период времени (Позитивный)")
     public void filterNewsCategoryAndTime() {
-        AuthSteps.validAuthorization();
+        //AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -147,11 +154,10 @@ public class NewsTest {
         NewsSteps.clickButtonFilter();
     }
 
-    @Test //8
+    @Test //9
     @Story("TC - 34")
     @Description("Фильтрация новостей  по начальной дате (негативный)")
     public void filterNewsStartDate() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -164,11 +170,10 @@ public class NewsTest {
         NewsSteps.clickButtonOkWrongMessage();
     }
 
-    @Test //9
+    @Test //10
     @Story("TC - 35")
     @Description("Фильтрация новостей  по конечной дате (негативный)")
     public void filterNewsEndDate() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -177,11 +182,10 @@ public class NewsTest {
         NewsSteps.clickButtonOkWrongMessage();
     }
 
-    @Test //10
+    @Test //11
     @Story("TC - 36")
     @Description("Фильтрация новостей по категории и датам с отменой фильтрации (Позитивный)")
     public void filterNewsCategoryDateWithCancel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
@@ -194,11 +198,10 @@ public class NewsTest {
         NewsSteps.clickButtonCancel();
     }
 
-    @Test //11
+    @Test //12
     @Story("TC - 31")
     @Description("Фильтрация новостей по категории (Позитивный)")
     public void filterNewsEmpty() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();

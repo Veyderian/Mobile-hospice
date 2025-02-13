@@ -1,8 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
 import androidx.test.espresso.IdlingRegistry;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,12 +26,13 @@ import ru.iteco.fmhandroid.ui.steps.MainSteps;
 
 @RunWith(AllureAndroidJUnit4.class)
 
-@Epic("Тест-кейсы для проведения функционального тестирования вкладки News и AllNews")
+@Epic("Тест-кейсы для проведения функционального тестирования вкладки Main")
 public class MainTest {
 
+
     @Rule
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
     public void setUp() {
@@ -51,8 +52,8 @@ public class MainTest {
 
     @AfterClass
     public static void exit() {
-        //AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
-        AuthSteps.clickButtonExit();
+        AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
+        //AuthSteps.clickButtonExit();
         AuthSteps.clickButtonLogOut();
     }
 

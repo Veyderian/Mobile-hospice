@@ -9,7 +9,7 @@ import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelBu
 import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSaveEditingNews;
 import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSwitcher;
 import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonTitleNews;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;

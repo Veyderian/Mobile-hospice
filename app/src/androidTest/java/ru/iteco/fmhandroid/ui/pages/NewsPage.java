@@ -5,13 +5,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-import static kotlinx.coroutines.flow.FlowKt.withIndex;
-import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
-//import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +30,12 @@ public class NewsPage {
     }
 
     public static Matcher<View> getButtonExpandNews() {
-          return allOf(withIndex(withId(R.id.view_news_item_image_view), 2));
-        //return allOf(withId(R.id.view_news_item_image_view));
+        //return allOf(withIndex(withId(R.id.view_news_item_image_view), 2));
+        return allOf(withIndex(withId(R.id.news_list_recycler_view), 2));
     }
 
     public static Matcher<View> getButtonSorting() {
-        return allOf(withId(R.id.sort_news_material_button), withContentDescription("Sort news list button"));
+        return allOf(withId(R.id.sort_news_material_button), withContentDescription("Sort news list button"), isDisplayed());
     }
 
     public static Matcher<View> getButtonFilterNews() {
@@ -51,21 +48,17 @@ public class NewsPage {
 
     }
 
-//    private static void waitUntilElement(int allNewsTextView) {
-//    }
-
-//    public static ViewInteraction getFindTextNews = onView(
-//            allOf(withId(R.id.filter_news_title_text_view), withText("Filter news"),
-//                    withParent(withParent(withId(R.id.nav_host_fragment))),
-//                    isDisplayed()));
-        //textView.check(matches(withText("Filter news")));
-
     public static void getFindText() {
         allOf(withId(R.id.filter_news_title_text_view), withText("Filter news"),
                 //withParent(withParent(withId(R.id.nav_host_fragment))),
                 isDisplayed());
     }
-//    public static Object getFindText;
+
+    public static void getFindText1() {
+        allOf(withId(R.id.empty_news_list_text_view), withText("There is nothing here yet…"),
+                isDisplayed());
+    }
+
 
     public static Matcher<View> getButtonFilter() {
         return allOf(withId(R.id.filter_button));
@@ -75,13 +68,6 @@ public class NewsPage {
         return allOf(withId(R.id.cancel_button));
     }
 
-    // проверка, что появилась надпись Filter news
-
-    // filter_news_title_text_view "Filter news"
-    // строка категория
-    // news_item_category_text_input_layout
-    // news_item_category_text_auto_complete_text_view
-
     public static ViewInteraction checkableImageButton = onView(
             allOf(withId(R.id.text_input_end_icon), withContentDescription("Show dropdown menu"),
                     childAtPosition(
@@ -90,8 +76,7 @@ public class NewsPage {
                                     1),
                             0),
                     isDisplayed()));
-        //checkableImageButton.perform(click());
-
+    //checkableImageButton.perform(click());
 
 
     public static Matcher<View> getButtonDateStart() {
@@ -156,5 +141,5 @@ public class NewsPage {
             }
         };
 
-}
+    }
 }

@@ -3,8 +3,8 @@ package ru.iteco.fmhandroid.ui.tests;
 import static androidx.test.espresso.Espresso.pressBack;
 
 import androidx.test.espresso.IdlingRegistry;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,15 +18,14 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Epic;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.pages.AuthPage;
 import ru.iteco.fmhandroid.ui.pages.ControlPanelPage;
 import ru.iteco.fmhandroid.ui.pages.EspressoIdlingResource;
-import ru.iteco.fmhandroid.ui.pages.MainPage;
-import ru.iteco.fmhandroid.ui.steps.AboutSteps;
 import ru.iteco.fmhandroid.ui.steps.AuthSteps;
 import ru.iteco.fmhandroid.ui.steps.ControlPanelStepsNews;
+import ru.iteco.fmhandroid.ui.steps.CreatingNewsSteps;
 import ru.iteco.fmhandroid.ui.steps.MainSteps;
 import ru.iteco.fmhandroid.ui.steps.NewsSteps;
-import ru.iteco.fmhandroid.ui.steps.CreatingNewsSteps;
 
 @LargeTest
 
@@ -36,8 +35,8 @@ import ru.iteco.fmhandroid.ui.steps.CreatingNewsSteps;
 
 public class CreatingNewsTest {
     @Rule
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
     public void setUp() {
@@ -57,28 +56,28 @@ public class CreatingNewsTest {
 
     @AfterClass
     public static void exit() {
-        //AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
-        AuthSteps.clickButtonExit();
+        AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
+        //AuthSteps.clickButtonExit();
         AuthSteps.clickButtonLogOut();
     }
-@Test //1
+
+    @Test //1
     @Story("TC - 48")
     @Description("Открытие вкладки Creating News на Control panel (Позитивный)")
     public void openCreatingNewsInControlPanel() {
-    AuthSteps.validAuthorization();
-    MainSteps.clickButtonMainMenu();
-    NewsSteps.clickButtonNews();
-    ControlPanelStepsNews.clickButtonControlPanel();
-    ControlPanelStepsNews.clickAddNews();
-    ControlPanelPage.getTextCreatingNews();
-    pressBack();
+        // AuthSteps.validAuthorization();
+        MainSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
+        ControlPanelStepsNews.clickButtonControlPanel();
+        ControlPanelStepsNews.clickAddNews();
+        ControlPanelPage.getTextCreatingNews();
+        pressBack();
     }
 
     @Test //2
     @Story("TC - 49")
     @Description("Создание новости на вкладке Control panel (Позитивный)")
     public void creatingNewsInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -92,13 +91,13 @@ public class CreatingNewsTest {
         CreatingNewsSteps.clickDescriptionCreatingNews();
         CreatingNewsSteps.clickButtonSaveCreatingNews();
 
-       pressBack();
+        pressBack();
     }
+
     @Test //3
     @Story("TC - 50")
     @Description("Создание новости c произвольным названием категории Control panel (Позитивный)")
     public void creatingNewsCategortyArbitraryNameInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -119,7 +118,7 @@ public class CreatingNewsTest {
     @Story("TC - 51")
     @Description("Создание новости c отменой Control panel (Позитивный)")
     public void creatingNewsCategoryWithCancelInControlPanel() {
-        AuthSteps.validAuthorization();
+        // AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -132,6 +131,7 @@ public class CreatingNewsTest {
         CreatingNewsSteps.clickButtonOkTimeCreatingNews();
         CreatingNewsSteps.clickDescriptionCreatingNews();
         CreatingNewsSteps.clickButtonCancelCreatingNews();
+        CreatingNewsSteps.clickButtonOkCancelCreatingNews();
         ControlPanelPage.getTextCreatingNews();
         pressBack();
     }
@@ -141,7 +141,6 @@ public class CreatingNewsTest {
     @Story("TC - 52")
     @Description("Создание новости c отменой отмены создания  (Позитивный)")
     public void creatingNewsCategoryWithCancelCancelInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -165,7 +164,6 @@ public class CreatingNewsTest {
     @Story("TC - 53")
     @Description("Поле Категория пустое, при создании новости,  (Негативный)")
     public void fieldCategoryEmptyCreationNewsInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -187,7 +185,6 @@ public class CreatingNewsTest {
     @Story("TC - 63")
     @Description("Поле Заголовок пустое, при создании новости, во вкладке Control panel(Негативный)")
     public void fieldTitleEmptyCreationNewsInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -228,7 +225,6 @@ public class CreatingNewsTest {
     @Description("Поле Время пустое, при создании новости, во вкладке Control panel (Негативный)")
 
     public void fieldTimeEmptyCreationNewsInControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();

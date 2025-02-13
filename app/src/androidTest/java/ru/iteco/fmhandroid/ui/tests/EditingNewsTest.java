@@ -1,8 +1,8 @@
 package ru.iteco.fmhandroid.ui.tests;
 
 import androidx.test.espresso.IdlingRegistry;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,6 +16,7 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Epic;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.pages.AuthPage;
 import ru.iteco.fmhandroid.ui.pages.ControlPanelPage;
 import ru.iteco.fmhandroid.ui.pages.EspressoIdlingResource;
 import ru.iteco.fmhandroid.ui.steps.AuthSteps;
@@ -33,8 +34,8 @@ import ru.iteco.fmhandroid.ui.steps.NewsSteps;
 
 public class EditingNewsTest {
     @Rule
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
     public void setUp() {
@@ -54,8 +55,7 @@ public class EditingNewsTest {
 
     @AfterClass
     public static void exit() {
-        //AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
-        AuthSteps.clickButtonExit();
+        AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
         AuthSteps.clickButtonLogOut();
     }
 
@@ -64,7 +64,6 @@ public class EditingNewsTest {
     @Story("TC - 57")
     @Description("открытие вкладки Editing news")
     public void editNewsControlPanel() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
@@ -73,11 +72,23 @@ public class EditingNewsTest {
 
     }
 
+    @Test //1
+    @Story("TC - 57")
+    @Description("редактирование строки TitleEditing news")
+    public void editNewsTitleControlPanel() {
+        MainSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
+        ControlPanelStepsNews.clickButtonControlPanel();
+        EditingNewsSteps.clickButtonEditNews();
+        EditingNewsSteps.clickButtonTitleNewsControlPanel();
+        ControlPanelPage.getTextEditingNews();
+
+    }
+
     @Test //2
     @Story("TC - 63")
-    @Description("Смена статуса новости, находящаяся в статусе АКТИВНА на статус НЕ АКТИВНА(Позитивный)")
+    @Description("Смена статуса новости, находящейся в статусе АКТИВНА на статус НЕ АКТИВНА(Позитивный)")
     public void statusChangeNews() {
-        AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();

@@ -5,11 +5,12 @@ buildscript {
     ext.nav_version = "2.3.5"
 
     repositories {
-        google()
         mavenCentral()
+        google()
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:7.0.4' //7.0.4
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
@@ -23,8 +24,11 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
         google()
+        mavenCentral()
+//        maven { url 'https://maven.google.com' } // Альтернативный URL
+//        maven { url 'https://jitpack.io' } // Для некоторых зависимостей
+
     }
 }
 
