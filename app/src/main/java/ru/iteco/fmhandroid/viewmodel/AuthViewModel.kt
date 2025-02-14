@@ -31,6 +31,7 @@ class AuthViewModel @Inject constructor(
 
     fun login(login: String, password: String) {
         viewModelScope.launch {
+           // EspressoIdlingResource.increment() // Увеличиваем счетчик перед асинхронной операцией
             try {
                 authRepository.login(login, password)
                 userRepository.getUserInfo()
@@ -44,12 +45,15 @@ class AuthViewModel @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
                 loginExceptionEvent.emit(Unit)
-            }
+            }//finally {
+             //   EspressoIdlingResource.decrement() // Уменьшаем счетчик после завершения операции
         }
     }
 
     fun authorization() {
         viewModelScope.launch {
+           // EspressoIdlingResource.increment()
+        //}
             val authState = appAuth.authState
             if (authState == null) {
                 nonAuthorizedEvent.emit(Unit)
@@ -61,23 +65,28 @@ class AuthViewModel @Inject constructor(
                     nonAuthorizedEvent.emit(Unit)
                 } catch (e: UnknownException) {
                     e.printStackTrace()
+                } //finally {
+                 //   EspressoIdlingResource.decrement() // Уменьшаем счетчик после завершения операции
                 }
             }
         }
-    }
 
-    fun logOut() {
-        appAuth.authState = null
-        userRepository.userLogOut()
-    }
-
-    suspend fun loadUserList() {
-        try {
-            userRepository.getAllUsers()
-            userListLoadedEvent.emit(Unit)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            getUserListExceptionEvent.emit(Unit)
+        fun logOut() {
+            appAuth.authState = null
+            userRepository.userLogOut()
         }
-    }
-}
+
+        suspend fun loadUserList() {
+           // EspressoIdlingResource.increment()
+       // }
+            try {
+                userRepository.getAllUsers()
+                userListLoadedEvent.emit(Unit)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                getUserListExceptionEvent.emit(Unit)
+            } //finally {
+               // EspressoIdlingResource.decrement() // Уменьшаем счетчик после завершения операции
+            }
+        }
+
