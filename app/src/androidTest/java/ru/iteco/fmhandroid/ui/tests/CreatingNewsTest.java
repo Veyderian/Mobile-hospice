@@ -167,6 +167,7 @@ public class CreatingNewsTest {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
+        ControlPanelStepsNews.clickAddNews();
         CreatingNewsSteps.clickButtonTitleCreatingNews();
         CreatingNewsSteps.clickButtonPublicationDateCreatingNews();
         CreatingNewsSteps.clickButtonOkDateCreatingNews();

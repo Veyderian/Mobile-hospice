@@ -71,7 +71,6 @@ public class QuotesTest {
     @Story("TC - 72")
     @Description("Развернуть/свернуть тематическую цитату (Позитивный)")
     public void expandThematicQuotes() {
-        //AuthSteps.validAuthorization();
         QuotesSteps.clickButtonThematicQuote();
         QuotesSteps.clickTitleThematicQuote();
         QuotesSteps.clickButtonExpandThematicQuote();

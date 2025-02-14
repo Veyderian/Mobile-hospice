@@ -78,6 +78,12 @@ public class ControlPanelStepsNews {
         onView(getNewsControlPanelButtonOkDeleteNews())
                 .perform(click());
     }
+    public static void clickButtonCanselDeleteNews() {
+        Allure.step("Нажать на кнопку Сохранить новость");
+        waitUntilElement(android.R.id.button2);
+        onView(getButtonCancelCancelCreatingNews())
+                .perform(scrollTo(), click());
+    }
 
     public static void clickRemoveCheckBoxNotActive() {
         Allure.step("Снять флажок с чекбокса Не активная");

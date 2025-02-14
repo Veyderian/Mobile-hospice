@@ -102,6 +102,7 @@ public class ControlPanelTest {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
+        NewsSteps.clickButtonFilterNews();
         NewsSteps.clickButtonDateStart();
         NewsSteps.clickButtonOkDate();
         NewsSteps.clickButtonDateEnd();
@@ -194,12 +195,12 @@ public class ControlPanelTest {
 
     @Test //11
     @Story("TC - 65")
-    @Description("Удаление активной новости во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
+    @Description("Удаление активной новости во вкладке Control panel (Позитивный)")
     public void deletingActiveNews() {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
-        ControlPanelStepsNews.clickClickNews();
+        //ControlPanelStepsNews.clickClickNews();
         ControlPanelStepsNews.clickButtonDeleteNews();
         ControlPanelStepsNews.clickOkDeleteNews();
     }
@@ -213,6 +214,7 @@ public class ControlPanelTest {
         ControlPanelStepsNews.clickButtonControlPanel();
         ControlPanelStepsNews.clickClickNews();
         ControlPanelStepsNews.clickButtonDeleteNews();
+        ControlPanelStepsNews.clickButtonCanselDeleteNews();
 
     }
 

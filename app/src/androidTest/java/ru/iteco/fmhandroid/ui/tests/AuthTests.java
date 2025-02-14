@@ -74,7 +74,6 @@ public class AuthTests {
     @Story("TC - 4")
     @Description("Поле Логин пустое при авторизации")
     public void loginFieldIsEmpty() {
-        //AuthSteps.textAuthorization();
         AuthSteps.clickLoginEmpty();
         AuthSteps.clickValidPasswordField();
         AuthPage.clickButtonSignIn();

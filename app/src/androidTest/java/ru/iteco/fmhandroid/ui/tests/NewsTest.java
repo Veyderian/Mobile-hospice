@@ -85,7 +85,6 @@ public class NewsTest {
     @Story("TC - 25")
     @Description("открытие страницы News через AllNews без новостей (Позитивный)")
     public void openNewsPageThroughAllNewsNoNews() {
-        //AuthSteps.validAuthorization();
         NewsSteps.clickButtonAllNews();
         //проверка
         NewsPage.getFindText1();
@@ -95,7 +94,6 @@ public class NewsTest {
     @Story("TC - 28")
     @Description("Просмотр новостей во вкладке Новости (Позитивный)")
     public void viewingNews() {
-        //AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickExpandNews();
@@ -131,6 +129,7 @@ public class NewsTest {
     public void filterNewsCertainPeriodTime() {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
+        NewsSteps.clickButtonFilterNews();
         NewsSteps.clickButtonDateStart();
         NewsSteps.clickButtonOkDate();
         NewsSteps.clickButtonDateEnd();
@@ -142,12 +141,10 @@ public class NewsTest {
     @Story("TC - 33")
     @Description("Фильтрация новостей по категории и датам в определенный период времени (Позитивный)")
     public void filterNewsCategoryAndTime() {
-        //AuthSteps.validAuthorization();
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
         NewsSteps.clickButtonTitleFilterNews();
-
         NewsSteps.clickButtonDateStart();
         NewsSteps.clickButtonOkDate();
         NewsSteps.clickButtonDateEnd();
@@ -162,10 +159,8 @@ public class NewsTest {
         NewsSteps.clickButtonNews();
         NewsSteps.clickButtonFilterNews();
         NewsSteps.clickButtonTitleFilterNews();
-
         NewsSteps.clickButtonDateStart();
         NewsSteps.clickButtonOkDate();
-        //NewsSteps.clickButtonDateEnd();
         NewsSteps.clickButtonFilter();
         NewsSteps.clickButtonOkWrongMessage();
     }
@@ -191,7 +186,6 @@ public class NewsTest {
         NewsSteps.clickButtonFilterNews();
         //NewsPage.checkTextView();
         NewsSteps.clickButtonTitleFilterNews();
-
         NewsSteps.clickButtonDateStart();
         NewsSteps.clickButtonOkDate();
         NewsSteps.clickButtonDateEnd();
