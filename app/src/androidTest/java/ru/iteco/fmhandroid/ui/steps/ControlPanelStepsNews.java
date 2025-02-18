@@ -1,44 +1,31 @@
 package ru.iteco.fmhandroid.ui.steps;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static org.hamcrest.Matchers.allOf;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getButtonCancelCancelCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getButtonCancelCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getButtonOkCancelCreatingNews;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsButtonControlPanel;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsButtonFilterNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelAddNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonClickNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonDateCreatingNews;
-//import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonDeleteNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonDeleteNews;
-import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonEditNews;
-import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsButtonFilterNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonOkDateCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonOkDeleteNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonOkTimeCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonSaveCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSaveEditingNews;
-//import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelButtonSorting;
-import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonSwitcher;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTimeCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTitleCreatingNews;
-import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonTitleNews;
-import static ru.iteco.fmhandroid.ui.pages.EditingNewsPage.getNewsControlPanelButtonTitleNews;
-import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelDescriptionCreatingNews;
-//import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsFilterNews;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelRemoveCheckBoxActive;
 import static ru.iteco.fmhandroid.ui.pages.ControlPanelPage.getNewsControlPanelRemoveCheckBoxNotActive;
+import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getButtonCancelCancelCreatingNews;
+import static ru.iteco.fmhandroid.ui.pages.Wait.waitId;
 import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
-//import static ru.iteco.fmhandroid.ui.pages.WaitId.waitUntilElement;
+
+import android.util.Log;
+import android.view.View;
+
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+
+import org.hamcrest.Matcher;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -52,32 +39,53 @@ public class ControlPanelStepsNews {
                 .perform(click());
     }
 
-    public static void clickButtonDeleteNews(){
-        Allure.step("Нажать на кнопку Удалить новость");
-        waitUntilElement(R.id.delete_news_item_image_view);
-        onView(getNewsControlPanelButtonDeleteNews())
-                .perform(click());
+    public static void waitUntilRecyclerViewLoaded() {
+        onView(isRoot()).perform(waitId(R.id.news_list_recycler_view, 15000)); // Ждем до 15 сек
+        onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
-    public static void clickClickNews(){
-        Allure.step("Нажать на кнопку Новости на главной странице мобильного приложения");
-        waitUntilElement(R.id.news_item_material_card_view);
-        onView(getNewsControlPanelButtonClickNews())
-                .perform(click());
+
+    public static void clickButtonDeleteNews(int index) {
+        Allure.step("Нажать на кнопку Удалить новость");
+        waitUntilRecyclerViewLoaded(); //  Ждем загрузки списка
+
+        // 🔍 Выводим текущее состояние View Hierarchy перед кликом
+        onView(isRoot()).perform(new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isRoot();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Печать View Hierarchy";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                Log.d("Espresso", "View Hierarchy: " + view.toString());
+            }
+        });
+
+        onView(getNewsControlPanelButtonDeleteNews(index))
+                .perform(scrollTo(), click());
     }
-    public static void clickExtendNews(){
+
+    public static void clickClickNews() {
         Allure.step("Нажать на кнопку Новости на главной странице мобильного приложения");
-        waitUntilElement(R.id.news_item_material_card_view);
-        onView(getNewsControlPanelButtonClickNews())
-                .perform(click());
+        waitUntilElement(R.id.news_list_recycler_view); // ✅ Ждем загрузки списка новостей
+
+        onView(withId(R.id.news_list_recycler_view))
+                .perform(actionOnItemAtPosition(0, click())); // ✅ Кликаем по первой новости
     }
 
     public static void clickOkDeleteNews() {
         Allure.step("Нажать на кнопку OK Удалить новость");
         waitUntilElement(android.R.id.button1);
         onView(getNewsControlPanelButtonOkDeleteNews())
-                .perform(click());
+                .perform(scrollTo(), click());
     }
+
     public static void clickButtonCanselDeleteNews() {
         Allure.step("Нажать на кнопку Сохранить новость");
         waitUntilElement(android.R.id.button2);
@@ -91,14 +99,6 @@ public class ControlPanelStepsNews {
         onView(getNewsControlPanelRemoveCheckBoxNotActive())
                 .perform(click());
     }
-
-
-//    public static void clickFilterNewsControlPanel() {
-//        Allure.step("Нажать на кнопку Фильтровать Новости");
-//        waitUntilElement(R.id.filter_news_material_button);
-//        onView(getNewsButttonFilterNews())
-//                .perform(click());
-//    }
 
     public static void clickButtonFilterNewsControlPanel() {
         Allure.step("Нажать на кнопку Фильтровать");

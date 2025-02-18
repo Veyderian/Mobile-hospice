@@ -21,7 +21,7 @@ import androidx.test.espresso.NoMatchingViewException;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
-//import static ru.iteco.fmhandroid.pages.WaitId.waitFor;
+
 
 
 public class AuthSteps {
@@ -37,15 +37,6 @@ public class AuthSteps {
             System.out.println("Already auth");
         }
     }
-
-//    public static void textAuthorization() {
-//        Allure.step("Отобразилаcь страница Авторизации");
-////        waitUntilElement(R.id.nav_host_fragment);
-////       onView(isRoot()).perform(waitForWindowFocus());
-////        onView(withId(R.id.nav_host_fragment));
-//        titleTextElement.check(matches(isDisplayed()));
-//    }
-
 
     public static void textAuthorization() {
         Allure.step("страница авторизации");
@@ -203,30 +194,6 @@ public class AuthSteps {
                 .perform(replaceText("12365436"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
     }
-
-
-//        public static <object> ViewAction waitForWindowFocus() {
-//            return new ViewAction() {
-//                @Override
-//                public Matcher<View> getConstraints() {
-//                    return isRoot(); // Действие будет применяться к корневому View
-//                }
-//
-//                @Override
-//                public String getDescription() {
-//                    return "Ожидание, пока окно получит фокус";
-//                }
-//
-////                @Override
-//                public void perform(UiController uiController, View view) {
-//                    while (!view.hasWindowFocus()) {
-//                        uiController.loopMainThreadForAtLeast(100); // Пауза 100 мс
-//                    }
-//                }
-//            };
-
-
-//        }
 }
 
 

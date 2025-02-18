@@ -31,11 +31,7 @@ public class NewsPage {
 
     public static Matcher<View> getButtonExpandNews() {
         //return allOf(withIndex(withId(R.id.view_news_item_image_view), 2));
-        return allOf(withIndex(withId(R.id.news_list_recycler_view), 2));
-    }
-
-    public static Matcher<View> getButtonSorting() {
-        return allOf(withId(R.id.sort_news_material_button), withContentDescription("Sort news list button"), isDisplayed());
+        return allOf(withIndex(withId(R.id.news_list_recycler_view), 2), isDisplayed());
     }
 
     public static Matcher<View> getButtonFilterNews() {

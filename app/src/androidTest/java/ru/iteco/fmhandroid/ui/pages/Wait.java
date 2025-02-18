@@ -114,7 +114,7 @@ public class Wait {
         };
     }
 
-    public static void waitFor(int seconds) {
+    public static ViewAction waitFor(int seconds) {
         seconds = seconds < 0 ? 0 : seconds;
         while (--seconds >= 0) {
             try {
@@ -123,5 +123,7 @@ public class Wait {
                 e.printStackTrace();
             }
         }
+
+        return null;
     }
 }

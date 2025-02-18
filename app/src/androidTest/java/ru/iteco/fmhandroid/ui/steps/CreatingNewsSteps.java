@@ -8,6 +8,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getButtonCancelCancelCreatingNews;
@@ -22,6 +23,8 @@ import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelB
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelButtonTitleCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.CreatingNewsPage.getNewsControlPanelDescriptionCreatingNews;
 import static ru.iteco.fmhandroid.ui.pages.Wait.waitUntilElement;
+
+import android.util.Log;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -132,6 +135,17 @@ public class CreatingNewsSteps {
         Allure.step("Нажать на кнопку Сохранить новость");
         waitUntilElement(android.R.id.button2);
         onView(getButtonCancelCancelCreatingNews())
+                .check(matches(isDisplayed()))
                 .perform(scrollTo(), click());
+
+    closeKeyboardIfNeeded();
+}
+    public static void closeKeyboardIfNeeded() {
+        try {
+            onView(isRoot()).perform(closeSoftKeyboard()); // Пытаемся закрыть клавиатуру
+        } catch (Exception e) {
+            Log.e("Espresso", "Не удалось закрыть клавиатуру, возможно, она уже скрыта.");
+        }
     }
+
 }

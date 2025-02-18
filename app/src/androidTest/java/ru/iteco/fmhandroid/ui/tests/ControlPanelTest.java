@@ -201,7 +201,7 @@ public class ControlPanelTest {
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
         //ControlPanelStepsNews.clickClickNews();
-        ControlPanelStepsNews.clickButtonDeleteNews();
+        ControlPanelStepsNews.clickButtonDeleteNews(2);
         ControlPanelStepsNews.clickOkDeleteNews();
     }
 
@@ -212,8 +212,7 @@ public class ControlPanelTest {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
-        ControlPanelStepsNews.clickClickNews();
-        ControlPanelStepsNews.clickButtonDeleteNews();
+        ControlPanelStepsNews.clickButtonDeleteNews(1);
         ControlPanelStepsNews.clickButtonCanselDeleteNews();
 
     }
@@ -230,6 +229,18 @@ public class ControlPanelTest {
         ControlPanelStepsNews.clickRemoveCheckBoxActive();
         ControlPanelStepsNews.clickRemoveCheckBoxNotActive();
         ControlPanelStepsNews.clickButtonFilterNewsControlPanel();
+    }
+
+    @Test //1
+    @Story("TC - 68")
+    @Description("Открытие/закрытие описания новости на  вкладке Control Panel (Позитивный)")
+    public void openNewsDescriptionControlPanel() {
+        MainSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
+        ControlPanelStepsNews.clickButtonControlPanel();
+        ControlPanelPage.getTextControlPanel();
+        ControlPanelStepsNews.clickClickNews();
+        ControlPanelStepsNews.clickClickNews();
     }
 
 

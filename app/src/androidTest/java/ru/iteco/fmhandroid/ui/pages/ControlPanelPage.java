@@ -1,13 +1,11 @@
 package ru.iteco.fmhandroid.ui.pages;
 
-import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-
-import static ru.iteco.fmhandroid.ui.pages.NewsPage.childAtPosition;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,7 @@ import ru.iteco.fmhandroid.ui.steps.ControlPanelStepsNews;
 
 public class ControlPanelPage extends ControlPanelStepsNews {
 
-    //ControlPanel
+
     public static Matcher<View> getNewsButtonControlPanel() {
         return allOf(withId(R.id.edit_news_material_button));
     }
@@ -31,23 +29,15 @@ public class ControlPanelPage extends ControlPanelStepsNews {
         return allOf(withIndex(withId(R.id.news_item_material_card_view), 2), isDisplayed());
     }
 
-
-//    public static Matcher<View> getNewsControlPanelTitleFilterNews() {
-//        return allOf(withId(R.id.filter_news_title_text_view));
-//    }
-
-//    public static Matcher<View> getNewsControlPanelButtonSorting() {
-//        return allOf(withId(R.id.sort_news_material_button));
-//    }
-
-
-    public static Matcher<View> getNewsControlPanelButtonDeleteNews() {
-//        return allOf(withId(R.id.delete_news_item_image_view),
-//                withContentDescription("News delete button"));
-        return allOf(withIndex(withId(R.id.delete_news_item_image_view), 2), isDisplayed());
+    public static Matcher<View> getNewsControlPanelButtonDeleteNews(int index) {
+        return allOf(
+                withId(R.id.delete_news_item_image_view),
+                withContentDescription("News delete button"),
+                isDescendantOfA(childAtPosition(
+                        childAtPosition(withId(R.id.news_list_recycler_view), index), 0)), // Ищем кнопку внутри нужного элемента списка
+                isDisplayed()
+        );
     }
-
-
 
     public static Matcher<View> getNewsControlPanelButtonOkDeleteNews() {
         return allOf(withId(android.R.id.button1));
@@ -86,7 +76,6 @@ public class ControlPanelPage extends ControlPanelStepsNews {
 
     }
 
-
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
         return new TypeSafeMatcher<View>() {
             @Override
@@ -102,7 +91,8 @@ public class ControlPanelPage extends ControlPanelStepsNews {
             final int currentIndex = 0;
         };
     }
-    private static Matcher<View> childAtPosition(
+
+    public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {

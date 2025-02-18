@@ -29,18 +29,7 @@ public class AuthTests {
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
-//        @Rule
-//        public ActivityTestRule<SplashActivity> activityTestRule = new ActivityTestRule<>(SplashActivity.class);
 
-    //    @Before
-//    public void setUp() {
-//        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource);
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource);
-//    }
     @Before
     public void authVerification() {
 
@@ -229,8 +218,6 @@ public class AuthTests {
         AuthPage.clickButtonSignIn();
         AuthSteps.textErrorWrong();
     }
-
-
 }
 
 

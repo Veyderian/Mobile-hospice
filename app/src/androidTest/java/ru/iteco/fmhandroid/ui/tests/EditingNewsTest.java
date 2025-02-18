@@ -63,36 +63,38 @@ public class EditingNewsTest {
     @Test //1
     @Story("TC - 57")
     @Description("открытие вкладки Editing news")
-    public void editNewsControlPanel() {
+    public void openEditNewsControlPanel() {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
-        EditingNewsSteps.clickButtonEditNews();
-        ControlPanelPage.getTextEditingNews();
-
-    }
-
-    @Test //1
-    @Story("TC - 57")
-    @Description("редактирование строки TitleEditing news")
-    public void editNewsTitleControlPanel() {
-        MainSteps.clickButtonMainMenu();
-        NewsSteps.clickButtonNews();
-        ControlPanelStepsNews.clickButtonControlPanel();
-        EditingNewsSteps.clickButtonEditNews();
-        EditingNewsSteps.clickButtonTitleNewsControlPanel();
+        ControlPanelStepsNews.clickClickNews();
+        EditingNewsSteps.clickButtonEditNews(1);
         ControlPanelPage.getTextEditingNews();
 
     }
 
     @Test //2
+    @Story("TC - 60")
+    @Description("редактирование строки TitleEditing news")
+    public void editNewsTitleControlPanel() {
+        MainSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
+        ControlPanelStepsNews.clickButtonControlPanel();
+        //ControlPanelStepsNews.clickClickNews();
+        EditingNewsSteps.clickButtonEditNews(1);
+        EditingNewsSteps.clickButtonTitleNewsControlPanel();
+        EditingNewsSteps.clickButtonSaveEditingNews();
+
+    }
+
+    @Test //3
     @Story("TC - 63")
     @Description("Смена статуса новости, находящейся в статусе АКТИВНА на статус НЕ АКТИВНА(Позитивный)")
     public void statusChangeNews() {
         MainSteps.clickButtonMainMenu();
         NewsSteps.clickButtonNews();
         ControlPanelStepsNews.clickButtonControlPanel();
-        EditingNewsSteps.clickButtonEditNews();
+        EditingNewsSteps.clickButtonEditNews(2);
         EditingNewsSteps.clickButtonSwitcher();
         EditingNewsSteps.clickButtonSaveEditingNews();
     }

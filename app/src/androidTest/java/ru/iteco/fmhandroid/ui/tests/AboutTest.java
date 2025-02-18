@@ -45,15 +45,6 @@ public class AboutTest {
 //            new IntentsTestRule<>(AppActivity.class);
 //
 
-//    @Before
-//    public void setUp() {
-//        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource);
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource);
-//    }
 
     @Before
     public void authorizationCheck() {

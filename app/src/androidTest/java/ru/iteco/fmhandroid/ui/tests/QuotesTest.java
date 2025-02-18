@@ -52,7 +52,6 @@ public class QuotesTest {
     @AfterClass
     public static void exit() {
         AuthSteps.clickButtonExit(AuthPage.getElementButtonExit());
-        //AuthSteps.clickButtonExit();
         AuthSteps.clickButtonLogOut();
     }
 
@@ -61,19 +60,19 @@ public class QuotesTest {
     @Story("TC - 71")
     @Description("открытие страницы Тематические цитаты (Позитивный)")
     public void openQuotesPage() {
-        // AuthSteps.validAuthorization();
         QuotesSteps.clickButtonThematicQuote();
-        QuotesPage.getTextQuoters();
+        QuotesPage.getTextQuotes();
 
     }
 
     @Test //2
     @Story("TC - 72")
-    @Description("Развернуть/свернуть тематическую цитату (Позитивный)")
+    @Description("Развернуть/свернуть тематическую цитату при нажатии на стрелку (Позитивный)")
     public void expandThematicQuotes() {
         QuotesSteps.clickButtonThematicQuote();
-        QuotesSteps.clickTitleThematicQuote();
+        QuotesPage.getTextQuotes();
         QuotesSteps.clickButtonExpandThematicQuote();
         QuotesSteps.clickDescriptionThematicQuote();
+        QuotesSteps.clickButtonExpandThematicQuote();
     }
 }

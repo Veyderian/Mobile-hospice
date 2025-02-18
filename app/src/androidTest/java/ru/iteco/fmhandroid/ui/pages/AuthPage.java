@@ -10,14 +10,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.steps.AuthSteps;
@@ -63,31 +59,5 @@ import ru.iteco.fmhandroid.ui.steps.AuthSteps;
             withParent(withParent(withId(R.id.container_list_news_include_on_fragment_main)));
             isDisplayed();
         }
-//        public static ViewInteraction titleTextElement =
-//                onView(withText("Authorization"));
-        //        public static void titleTextElement() {
-//            withText("Authorization");
-//        }
-
-
-//        private static Matcher<View> childAtPosition(
-//                final Matcher<View> parentMatcher, final int position) {
-//
-//            return new TypeSafeMatcher<View>() {
-//                @Override
-//                public void describeTo(Description description) {
-//                    description.appendText("Child at position " + position + " in parent ");
-//                    parentMatcher.describeTo(description);
-//                }
-//
-//                @Override
-//                public boolean matchesSafely(View view) {
-//                    ViewParent parent = view.getParent();
-//                    return parent instanceof ViewGroup && parentMatcher.matches(parent)
-//                            && view.equals(((ViewGroup) parent).getChildAt(position));
-//                }
-//            };
-
-//        }
     }
 
