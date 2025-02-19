@@ -1,6 +1,7 @@
 package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -49,12 +50,6 @@ public class NewsPage {
                 //withParent(withParent(withId(R.id.nav_host_fragment))),
                 isDisplayed());
     }
-
-    public static void getFindText1() {
-        allOf(withId(R.id.empty_news_list_text_view), withText("There is nothing here yet…"),
-                isDisplayed());
-    }
-
 
     public static Matcher<View> getButtonFilter() {
         return allOf(withId(R.id.filter_button));

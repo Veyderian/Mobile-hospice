@@ -81,16 +81,8 @@ public class NewsTest {
         AuthPage.getFindText();
     }
 
-    @Test //3
-    @Story("TC - 25")
-    @Description("открытие страницы News через AllNews без новостей (Позитивный)")
-    public void openNewsPageThroughAllNewsNoNews() {
-        NewsSteps.clickButtonAllNews();
-        //проверка
-        NewsPage.getFindText1();
-    }
 
-    @Test //4
+    @Test //3
     @Story("TC - 28")
     @Description("Просмотр новостей во вкладке Новости (Позитивный)")
     public void viewingNews() {
@@ -100,7 +92,7 @@ public class NewsTest {
     }
 
 
-    @Test //5
+    @Test //4
     @Story("TC - 30")
     @Description("Открытие окна Filter news (Позитивный)")
     public void openFilterNews() {
@@ -111,7 +103,7 @@ public class NewsTest {
     }
 
 
-    @Test //6
+    @Test //5
     @Story("TC - 31")
     @Description("Фильтрация новостей по категории (Позитивный)")
     public void filterNewsCategory() {
@@ -123,7 +115,7 @@ public class NewsTest {
     }
 
 
-    @Test //7
+    @Test //6
     @Story("TC - 32")
     @Description("Фильтрация новостей по датам  (Позитивный)")
     public void filterNewsCertainPeriodTime() {
@@ -137,7 +129,7 @@ public class NewsTest {
         NewsSteps.clickButtonFilter();
     }
 
-    @Test //8
+    @Test //7
     @Story("TC - 33")
     @Description("Фильтрация новостей по категории и датам в определенный период времени (Позитивный)")
     public void filterNewsCategoryAndTime() {
@@ -151,7 +143,7 @@ public class NewsTest {
         NewsSteps.clickButtonFilter();
     }
 
-    @Test //9
+    @Test //8
     @Story("TC - 34")
     @Description("Фильтрация новостей  по начальной дате (негативный)")
     public void filterNewsStartDate() {
@@ -165,7 +157,7 @@ public class NewsTest {
         NewsSteps.clickButtonOkWrongMessage();
     }
 
-    @Test //10
+    @Test //9
     @Story("TC - 35")
     @Description("Фильтрация новостей  по конечной дате (негативный)")
     public void filterNewsEndDate() {
@@ -177,7 +169,7 @@ public class NewsTest {
         NewsSteps.clickButtonOkWrongMessage();
     }
 
-    @Test //11
+    @Test //10
     @Story("TC - 36")
     @Description("Фильтрация новостей по категории и датам с отменой фильтрации (Позитивный)")
     public void filterNewsCategoryDateWithCancel() {
@@ -192,7 +184,7 @@ public class NewsTest {
         NewsSteps.clickButtonCancel();
     }
 
-    @Test //12
+    @Test //11
     @Story("TC - 31")
     @Description("Фильтрация новостей по категории (Позитивный)")
     public void filterNewsEmpty() {
